@@ -38,12 +38,7 @@ jobs:
           chmod +x ipnoticias.sh
           ./ipnoticias.sh
         
-      - name: Main (c26)  # Agrega esta tarea para el nuevo canal "c26"
-        run: |
-          pwd
-          chmod +x c26.sh  # Asegúrate de tener un script específico para c26.sh
-          ./c26.sh
-
+      
       - name: git add
         run: |
           git add -A
