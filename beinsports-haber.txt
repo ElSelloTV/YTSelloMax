@@ -2,5 +2,5 @@
 ~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
 
 
-beIN SPORTS HABER | | | |
-https://www.youtube.com/@beinsportsturkiye/live
+ipNoticias | | | |
+https://youtu.be/HTkRWgGltQw
