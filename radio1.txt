@@ -2,5 +2,5 @@
 ~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
 
 
-telefe | | |
-https://www.twitch.tv/elnuevevivo
+radio1 | | |
+https://www.youtube.com/watch?v=QIBVhIS6v3s&ab_channel=La100
