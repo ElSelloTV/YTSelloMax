@@ -6,6 +6,6 @@ python3 -m pip install requests
 
 cd $(dirname $0)/scripts/
 
-python3 telefe.py > ../telefe.m3u8
+python3 radio1.py > ../radio1.m3u8
 
 echo m3u8 grabbed
