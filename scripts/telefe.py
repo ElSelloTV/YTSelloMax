@@ -3,7 +3,6 @@
 import os
 import sys
 import requests
-import re
 
 windows = False
 if 'win' in sys.platform:
@@ -11,10 +10,12 @@ if 'win' in sys.platform:
 
 def grab(url):
     response = requests.get(url).text
-    m3u8_match = re.search(r'(https?://[^\s]+\.m3u8)', response)
-
-    if m3u8_match:
-        stream_url = m3u8_match.group(1)
+    m3u8_index = response.find('.m3u8')
+    
+    if m3u8_index != -1:
+        start_index = max(response.rfind('https://', 0, m3u8_index), response.rfind('http://', 0, m3u8_index))
+        end_index = response.find('.m3u8', m3u8_index) + 5
+        stream_url = response[start_index:end_index]
         print(stream_url)
     else:
         print(f"No se encontró enlace .m3u8 para {url}")
