@@ -2,5 +2,5 @@
 ~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
 
 
-c26 | | |
-https://www.youtube.com/watch?v=XxqTYlf9QK4&ab_channel=UrbanaPlay104.3FM
+urbana | | |
+https://www.youtube.com/live/hCTk2RRxC1k?si=U408i2VjD-Xfy-hn
