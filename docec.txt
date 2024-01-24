@@ -2,5 +2,5 @@
 ~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
 
 
-especiales | | |
-https://www.youtube.com/watch?v=avly0uwZzOE&ab_channel=Cr%C3%B3nicaTV
+docec | | |
+https://www.youtube.com/@eldoce/live
