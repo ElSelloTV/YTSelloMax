@@ -4,12 +4,12 @@ name: ipnoticias
 # Controls when the action will run. 
 on:
   schedule:
-    - cron: '0 0/3 * * *'
-    
+    - cron: '0 0/5 * * *'
+
   pull_request:
     branches:
       - main
-  
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -35,20 +35,15 @@ jobs:
       - name: Main (ipnoticias)
         run: |
           pwd
-          chmod +x ipnoticias.sh
-          ./ipnoticias.sh
+          chmod +x nueve.sh
+          ./nueve.sh
         
+      
       - name: git add
         run: |
           git add -A
           
-      - name: commit & push 
+      - name: commit & push
         run: |
-          git add -A
-          git diff --staged --exit-code
-          if [ $? -eq 1 ]; then
-            git commit -m "Link updated"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+          git commit -m "Link updated"
+          git push
