@@ -42,6 +42,13 @@ jobs:
         run: |
           git add -A
           
-      - name: commit & push
+      - name: commit & push 
         run: |
-          git diff --quiet --exit-code --cached || (git commit -m "Link updated"; git push) || echo "No changes to commit or push."
+          git add -A
+          git diff --staged --exit-code
+          if [ $? -eq 1 ]; then
+            git commit -m "Link updated"
+            git push
+          else
+            echo "No changes to commit."
+          fi
