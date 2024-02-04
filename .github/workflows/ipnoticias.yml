@@ -37,16 +37,11 @@ jobs:
           pwd
           chmod +x ipnoticias.sh
           ./ipnoticias.sh
-      
+        
       - name: git add
         run: |
           git add -A
           
       - name: commit & push
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Link updated"
-            git push
-          else
-            echo "No hay cambios para hacer commit."
-          fi
+          git diff --quiet --exit-code --cached || (git commit -m "Link updated"; git push) || echo "No changes to commit or push."
