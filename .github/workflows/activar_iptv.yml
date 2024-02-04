@@ -1,0 +1,22 @@
+name: Activar IPTV
+
+on:
+  schedule:
+    # Ejecuta el flujo de trabajo cada 5 horas
+    - cron: '0 */5 * * *'
+
+jobs:
+  activar:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      # Extrae tu repositorio en el entorno de ejecución del flujo de trabajo
+
+    - name: Ejecutar script de activación
+      run: |
+        chmod +x ./activar.sh
+        ./activar.sh
+      # Asegúrate de que tu script es ejecutable y luego ejecútalo
+
+    # Aquí puedes añadir pasos adicionales para ejecutar otros scripts o acciones según sea necesario
