@@ -1,15 +1,15 @@
 # This is a basic workflow to help you get started with Actions
-name: ipnoticias
+name: telefe
 
 # Controls when the action will run. 
 on:
   schedule:
-    - cron: '0 0/5 * * *'
-
+    - cron: '0 0/6 * * *'
+    
   pull_request:
     branches:
       - main
-
+  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -32,11 +32,11 @@ jobs:
           git config --global user.email "elselloweb@gmail.com"
           git config --global user.name "ElSelloTV"
       
-      - name: Main (ipnoticias)
+      - name: Main (especiales)
         run: |
           pwd
-          chmod +x nueve.sh
-          ./nueve.sh
+          chmod +x ipnoticias.sh
+          ./ipnoticias.sh
         
       
       - name: git add
