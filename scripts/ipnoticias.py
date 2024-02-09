@@ -40,11 +40,9 @@ def grab_twitch(channel_name):
         return None
 
 def main():
-    with open('ipnoticias.m3u8', 'w') as m3u8_file:  # Ajusta la ruta si es necesario
+    with open('ipnoticias.m3u8', 'w') as m3u8_file:
         m3u8_file.write('#EXTM3U\n')
-        m3u8_file.write('#EXT-X-VERSION:3\n')
-        m3u8_file.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-        with open('ipnoticias.txt') as f:  # Ajusta la ruta si es necesario
+        with open('ipnoticias.txt') as f:
             for line in f:
                 line = line.strip()
                 if not line or line.startswith('~~') or 'twitch.tv' not in line:
@@ -52,10 +50,14 @@ def main():
                 channel_name = line.split('/')[-1]
                 m3u8_link = grab_twitch(channel_name)
                 if m3u8_link:
+                    # Escribe los metadatos y el enlace M3U8 para cada stream de Twitch
+                    m3u8_file.write('#EXT-X-VERSION:3\n')
+                    m3u8_file.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
                     m3u8_file.write(f'{m3u8_link}\n')
 
 if __name__ == "__main__":
     main()
+
 
 # Limpieza de archivos temporales, si existen
 if 'temp.txt' in os.listdir('.'):
