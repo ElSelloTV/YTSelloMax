@@ -34,25 +34,29 @@ def grab_twitch(channel_name):
         token = json_response['data']['playbackAccessToken']['value']
         sig = json_response['data']['playbackAccessToken']['signature']
         m3u8_url = f"https://usher.ttvnw.net/api/channel/hls/{channel_name}.m3u8?client_id={client_id}&token={token}&sig={sig}&allow_audio_only=true&allow_source=true&type=any"
-        print(m3u8_url)
+        return m3u8_url
     else:
         print("Error fetching Twitch M3U8 link")
+        return None
 
 def main():
-    print('#EXTM3U')
-    print('#EXT-X-VERSION:3')
-    print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
-    with open('../ipnoticias.txt') as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith('~~'):
-                continue
-            elif 'twitch.tv' in line:
-                channel_name = line.split('/')[-1]  # Asume que la URL es del formato twitch.tv/nombre_del_canal
-                grab_twitch(channel_name)
+    with open('ipnoticias.m3u8', 'w') as m3u8_file:  # Ajusta la ruta si es necesario
+        m3u8_file.write('#EXTM3U\n')
+        m3u8_file.write('#EXT-X-VERSION:3\n')
+        m3u8_file.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
+        with open('ipnoticias.txt') as f:  # Ajusta la ruta si es necesario
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('~~') or 'twitch.tv' not in line:
+                    continue
+                channel_name = line.split('/')[-1]
+                m3u8_link = grab_twitch(channel_name)
+                if m3u8_link:
+                    m3u8_file.write(f'{m3u8_link}\n')
 
 if __name__ == "__main__":
     main()
 
-if 'temp.txt' in os.listdir():
+# Limpieza de archivos temporales, si existen
+if 'temp.txt' in os.listdir('.'):
     os.system('rm temp.txt')
