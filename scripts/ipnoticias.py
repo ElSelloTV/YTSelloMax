@@ -2,7 +2,7 @@ import requests
 import os
 
 client_id = '4p7co79ke3c09hydlf071ouvy8coa1'
-access_token = 'tu_token_de_acceso'
+access_token = '94a1h60airzvo0btb0rwv0xhb3zkcr'
 
 def grab_twitch(channel_url):
     if "twitch.tv" in channel_url:
