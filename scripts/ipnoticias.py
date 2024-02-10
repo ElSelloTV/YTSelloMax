@@ -1,9 +1,9 @@
-#! /usr/bin/python3
-
 import requests
 import os
 
 client_id = '4p7co79ke3c09hydlf071ouvy8coa1'
+# Asegúrate de obtener y usar tu token de acceso de aplicación aquí.
+access_token = '94a1h60airzvo0btb0rwv0xhb3zkcr'
 
 def grab_twitch(channel_url):
     if "twitch.tv" in channel_url:
@@ -15,6 +15,7 @@ def grab_twitch(channel_url):
     print(f"Procesando canal: {channel_name}")
     headers = {
         'Client-ID': client_id,
+        'Authorization': f'Bearer {access_token}',
         'Content-Type': 'application/json',
     }
     data = {
@@ -46,24 +47,4 @@ def grab_twitch(channel_url):
         print(f"Error: La API de Twitch retornó el código de estado {response.status_code}")
         return None
 
-def main():
-    # Ajusta la ruta al archivo ipnoticias.txt si es necesario
-    path_to_ipnoticias_txt = os.path.join(os.path.dirname(__file__), '..', 'ipnoticias.txt')
-    path_to_ipnoticias_m3u8 = os.path.join(os.path.dirname(__file__), '..', 'ipnoticias.m3u8')
-
-    with open(path_to_ipnoticias_m3u8, 'w') as m3u8_file:
-        m3u8_file.write('#EXTM3U\n')
-        with open(path_to_ipnoticias_txt) as f:
-            for line in f:
-                line = line.strip()
-                if 'twitch.tv' in line:
-                    m3u8_link = grab_twitch(line)
-                    if m3u8_link:
-                        m3u8_file.write(f'#EXTINF:-1, {line}\n')
-                        m3u8_file.write(f'{m3u8_link}\n')
-                    else:
-                        print(f"No se pudo obtener el enlace M3U8 para: {line}")
-
-if __name__ == "__main__":
-    main()
-
+# Ajusta la implementación de main() y otras funciones según sea necesario.
