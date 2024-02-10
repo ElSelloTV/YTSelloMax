@@ -1,25 +1,25 @@
 #! /usr/bin/python3
 
 import requests
-import os
 
-client_id = '4p7co79ke3c09hydlf071ouvy8coa1'  # Tu Client-ID de Twitch
+client_id = '4p7co79ke3c09hydlf071ouvy8coa1'
 
-def grab_twitch(channel_name):
+def grab_twitch(channel_url):
+    # Extrae el nombre del canal de la URL de Twitch
+    if "twitch.tv" in channel_url:
+        channel_name = channel_url.split('/')[-1]
+    else:
+        print(f"URL no válida, omitiendo: {channel_url}")
+        return None
+
+    print(f"Procesando canal: {channel_name}")
     headers = {
         'Client-ID': client_id,
         'Content-Type': 'application/json',
     }
     data = {
         'operationName': "PlaybackAccessToken_Template",
-        'query': """
-        query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!) {
-          playbackAccessToken(login: $login, isLive: $isLive, vodID: $vodID, isVod: $isVod, playerType: $playerType) {
-            value
-            signature
-            __typename
-          }
-        }""",
+        'query': """tu consulta GraphQL aquí""",
         'variables': {
             'isLive': True,
             'login': channel_name,
@@ -36,7 +36,7 @@ def grab_twitch(channel_name):
         m3u8_url = f"https://usher.ttvnw.net/api/channel/hls/{channel_name}.m3u8?client_id={client_id}&token={token}&sig={sig}&allow_audio_only=true&allow_source=true&type=any"
         return m3u8_url
     else:
-        print("Error fetching Twitch M3U8 link")
+        print(f"Error: La API de Twitch retornó el código de estado {response.status_code}")
         return None
 
 def main():
@@ -45,20 +45,13 @@ def main():
         with open('ipnoticias.txt') as f:
             for line in f:
                 line = line.strip()
-                if not line or line.startswith('~~') or 'twitch.tv' not in line:
-                    continue
-                channel_name = line.split('/')[-1]
-                m3u8_link = grab_twitch(channel_name)
-                if m3u8_link:
-                    # Escribe los metadatos y el enlace M3U8 para cada stream de Twitch
-                    m3u8_file.write('#EXT-X-VERSION:3\n')
-                    m3u8_file.write('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000\n')
-                    m3u8_file.write(f'{m3u8_link}\n')
+                if 'twitch.tv' in line:
+                    m3u8_link = grab_twitch(line)
+                    if m3u8_link:
+                        m3u8_file.write(f'#EXTINF:-1, {line}\n')  # Añade información adicional si es necesario
+                        m3u8_file.write(f'{m3u8_link}\n')
+                    else:
+                        print(f"No se pudo obtener el enlace M3U8 para: {line}")
 
 if __name__ == "__main__":
     main()
-
-
-# Limpieza de archivos temporales, si existen
-if 'temp.txt' in os.listdir('.'):
-    os.system('rm temp.txt')
