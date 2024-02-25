@@ -6,6 +6,6 @@ python3 -m pip install requests
 
 cd $(dirname $0)/scripts/
 
-python3 espnsports.py > ../espnsports.m3u8
+python3 deportes1.py > ../deportes1.m3u8
 
 echo m3u8 grabbed
