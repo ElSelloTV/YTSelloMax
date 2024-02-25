@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
-
 import requests
+import re
 import os
 import sys
 
@@ -9,41 +9,28 @@ windows = False
 if 'win' in sys.platform:
     windows = True
 
-def grab(url):
-    response = s.get(url, timeout=15).text
-    if '.m3u8' not in response:
-        response = requests.get(url).text
-        if '.m3u8' not in response:
-            if windows:
-                print('https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8')
-                return
-            #os.system(f'wget {url} -O temp.txt')
-            os.system(f'curl "{url}" > temp.txt')
-            response = ''.join(open('temp.txt').readlines())
-            if '.m3u8' not in response:
-                print('https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8')
-                return
-    end = response.find('.m3u8') + 5
-    tuner = 100
-    while True:
-        if 'https://' in response[end-tuner : end]:
-            link = response[end-tuner : end]
-            start = link.find('https://')
-            end = link.find('.m3u8') + 5
-            break
-        else:
-            tuner += 5
-    streams = s.get(link[start:end]).text.split('#EXT')
-    hd = streams[-1].strip()
-    st = hd.find('http')
-    print(hd[st:].strip())
-    #print(f"{link[start : end]}")
+# Esta función intentará encontrar la URL del stream .m3u8 en una página de ok.ru
+def grab_okru(url):
+    response = requests.get(url, timeout=15).text
+
+    # Expresión regular para buscar la URL del .m3u8 dentro del contenido de la página
+    # Esta expresión regular es un ejemplo y puede necesitar ser ajustada
+    m3u8_urls = re.findall(r'https://[^\s"]+\.m3u8[^\s"]*', response)
+    
+    if m3u8_urls:
+        # Si se encuentran URLs, asumimos la primera como la correcta
+        print('#EXTM3U')
+        print('#EXT-X-VERSION:3')
+        print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
+        print(m3u8_urls[0])
+    else:
+        # En caso de no encontrar el enlace .m3u8, imprimir un enlace predeterminado o manejar el error
+        print('No se encontró el stream .m3u8')
 
 print('#EXTM3U')
 print('#EXT-X-VERSION:3')
 print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
-s = requests.Session()
-with open('../espnsports.txt') as f:
+with open('../deportes1.txt') as f:
     for line in f:
         line = line.strip()
         if not line or line.startswith('~~'):
@@ -55,8 +42,9 @@ with open('../espnsports.txt') as f:
             tvg_logo = line[2].strip()
             tvg_id = line[3].strip()
         else:
-            grab(line)
+            # Llamar a la función específica para ok.ru
+            grab_okru(line)
 
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')
-    os.system('rm watch*')
+
