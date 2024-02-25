@@ -1,10 +1,10 @@
 # This is a basic workflow to help you get started with Actions
-name: espnsports
+name: deportes1
 
 # Controls when the action will run. 
 on:
   schedule:
-    - cron: '0 0/6 * * *'
+    - cron: '0 0/3 * * *'
     
   pull_request:
     branches:
@@ -35,8 +35,8 @@ jobs:
       - name: Main (especiales)
         run: |
           pwd
-          chmod +x espnsports.sh
-          ./espnsports.sh
+          chmod +x deportes1.sh
+          ./deportes1.sh
         
       
       - name: git add
