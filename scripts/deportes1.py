@@ -24,7 +24,7 @@ def grab(url):
             if windows:
                 print('https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8')
             else:
-                print('No se encontró el stream .m3u8 segui intentando')
+                print('No se encontró el stream .m3u8')
     except requests.RequestException as e:
         print(f"Error al realizar la solicitud: {e}")
 
