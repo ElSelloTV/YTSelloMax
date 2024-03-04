@@ -17,8 +17,8 @@ jobs:
 
     - name: Configurar Git
       run: |
-        git config --global user.email "tuemail@example.com"
-        git config --global user.name "TuNombreDeUsuario"
+        git config --global user.email "elselloweb@gmail.com"
+        git config --global user.name "ElSelloTV"
       # Configura Git (ajusta con tu información)
 
     - name: Ejecutar script de activación
