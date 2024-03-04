@@ -1,45 +1,62 @@
 #! /usr/bin/python3
 
+
 import requests
-import re
 import os
 import sys
 
-# Asumiendo que estamos trabajando en un entorno similar al script original
 windows = False
 if 'win' in sys.platform:
     windows = True
 
 def grab(url):
-    try:
-        response = requests.get(url, timeout=15)
-        # Busca URLs que terminen en .m3u8 dentro del contenido de la respuesta
-        m3u8_urls = re.findall(r'https://[^\s"]+\.m3u8[^\s"]*', response.text)
-        
-        if m3u8_urls:
-            # Si encuentra alguna URL, imprime la primera
-            print(m3u8_urls[0])
-        else:
-            # Manejo en caso de no encontrar la URL .m3u8
+    response = s.get(url, timeout=15).text
+    if '.m3u8' not in response:
+        response = requests.get(url).text
+        if '.m3u8' not in response:
             if windows:
                 print('https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8')
-            else:
-                print('No se encontró el stream .m3u8')
-    except requests.RequestException as e:
-        print(f"Error al realizar la solicitud: {e}")
+                return
+            #os.system(f'wget {url} -O temp.txt')
+            os.system(f'curl "{url}" > temp.txt')
+            response = ''.join(open('temp.txt').readlines())
+            if '.m3u8' not in response:
+                print('https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8')
+                return
+    end = response.find('.m3u8') + 5
+    tuner = 100
+    while True:
+        if 'https://' in response[end-tuner : end]:
+            link = response[end-tuner : end]
+            start = link.find('https://')
+            end = link.find('.m3u8') + 5
+            break
+        else:
+            tuner += 5
+    streams = s.get(link[start:end]).text.split('#EXT')
+    hd = streams[-1].strip()
+    st = hd.find('http')
+    print(hd[st:].strip())
+    #print(f"{link[start : end]}")
 
-# Inicia el script
-if __name__ == "__main__":
-    print('#EXTM3U')
-    print('#EXT-X-VERSION:3')
-    print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
-    
-    with open('deportes1.txt') as f:  # Asegúrate de tener la ruta correcta al archivo
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith('~~'):
-                continue
-            if line.startswith('https:'):
-                grab(line)
+print('#EXTM3U')
+print('#EXT-X-VERSION:3')
+print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
+s = requests.Session()
+with open('../deportes1.txt') as f:
+    for line in f:
+        line = line.strip()
+        if not line or line.startswith('~~'):
+            continue
+        if not line.startswith('https:'):
+            line = line.split('|')
+            ch_name = line[0].strip()
+            grp_title = line[1].strip().title()
+            tvg_logo = line[2].strip()
+            tvg_id = line[3].strip()
+        else:
+            grab(line)
 
-
+if 'temp.txt' in os.listdir():
+    os.system('rm temp.txt')
+    os.system('rm watch*')
