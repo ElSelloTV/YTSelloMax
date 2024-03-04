@@ -1,0 +1,6 @@
+~~ DO NOT EDIT THE FIRST 2 LINES	
+~~ FORMAT: <channel name> | <group name> | <logo> | <tvg-id>
+
+
+c5n | | | |
+https://www.youtube.com/user/c5n/live
