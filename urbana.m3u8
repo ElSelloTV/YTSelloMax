@@ -1,4 +1,4 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-https://raw.githubusercontent.com/ElSelloTV/YTSelloMax/main/assets/info.m3u8
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1714090810/ei/2p4qZon5H7GKkucP6vev2AU/ip/20.109.37.7/id/NT_B_06lt5w.1/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hdlc/1/hls_chunk_host/rr5---sn-p5qddn7z.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/spc/UWF9f-DoljucZIMBWwiOg92Rav7dugWezL55Ix1FSCLDL3-0CbjGIYjY951a/vprv/1/playlist_type/DVR/mh/-4/mm/44/mn/sn-p5qddn7z/ms/lva/mv/u/mvi/5/pl/16/dover/11/pacing/0/keepalive/yes/mt/1714068569/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,hdlc,xpc,playlist_duration,manifest_duration,spc,vprv,playlist_type/sig/AJfQdSswRQIge9JGrX2vuKNwwv-ByEuI25ttQV7GUPx0R9pnUka_0i8CIQDnOLEdWBnrXdIi3G_P2NJ3K7ejaD1g_cOb4zOBKxWOyA%3D%3D/lsparams/hls_chunk_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AHWaYeowRgIhAKkWaes8IdatK7-rMCiMy588WoiyIwl744y3Am50XilNAiEA6MSNYBTMNTWxPzvQ2jTMD9SbPEv9V0hgtnDBt5lwd-I%3D/playlist/index.m3u8
