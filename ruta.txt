@@ -1,1 +1,1 @@
-https://vsd200.mycdn.me/hls/5927964838496.m3u8/sig/1GaScJnjYo8/expires/1714284546887/srcIp/201.219.65.29/urls/185.226.52.67/clientType/1/srcAg/CHROME/mid/6576421674592/video.m3u8?p
+https://vsd105.mycdn.me/hls/5927964838496.m3u8/sig/W1mqfi3eafA/expires/1714284854350/srcIp/201.219.65.29/urls/185.226.53.84/clientType/1/srcAg/CHROME/mid/6576421674592/video.m3u8?p
