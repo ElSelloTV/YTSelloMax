@@ -35,7 +35,7 @@ print('#EXT-X-VERSION:3')
 print('#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000')
 
 # Leer el enlace m3u8 del archivo 'ruta.txt'
-with open("main/ruta.txt", "r") as file:
+with open("ruta.txt", "r") as file:
     m3u8_url = file.readline().strip()
     if m3u8_url:
         grab(m3u8_url)
