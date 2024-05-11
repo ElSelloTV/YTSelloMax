@@ -4,7 +4,7 @@ name: radiomitre
 # Controls when the action will run. 
 on:
   schedule:
-    - cron: '0 0/3 * * *'
+    - cron: '0 0/6 * * *'
     
   pull_request:
     branches:
@@ -35,8 +35,8 @@ jobs:
       - name: Main (especiales)
         run: |
           pwd
-          chmod +x deportes1.sh
-          ./deportes1.sh
+          chmod +x rmitre.sh
+          ./rmitre.sh
         
       
       - name: git add
