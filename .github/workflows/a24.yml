@@ -1,11 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
-name: c26
+name: a24
 
 # Controls when the action will run. 
 on:
   schedule:
-    - cron: '0 0/10 * * *'
+    - cron: '0 0/6 * * *'
     
   pull_request:
     branches:
@@ -41,8 +41,8 @@ jobs:
       - name: Main
         run: |
           pwd
-          chmod +x c26.sh
-          ./c26.sh
+          chmod +x a24.sh
+          ./a24.sh
         
       - name: git add
         run: |
